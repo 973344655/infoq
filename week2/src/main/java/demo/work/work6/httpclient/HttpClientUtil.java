@@ -24,6 +24,7 @@ public class HttpClientUtil {
 
     private static final CloseableHttpClient httpClient;
 
+    //初始化httpClient
     static {
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(1000*60)
@@ -47,9 +48,8 @@ public class HttpClientUtil {
 
         //请求参数
         if(params != null && params.length > 0){
-            setGetParams(url, params[0]);
+            url = setGetParams(url, params[0]);
         }
-
 
         HttpGet get = new HttpGet(url);
 
@@ -60,6 +60,7 @@ public class HttpClientUtil {
 
         CloseableHttpResponse response = null;
 
+        //发送请求
         try {
             response = httpClient.execute(get);
             if(HttpStatus.SC_OK == response.getStatusLine().getStatusCode()){
@@ -81,17 +82,17 @@ public class HttpClientUtil {
      * @param url
      * @param params
      */
-    private static void setGetParams(String url, Map<String,String> params){
-
+    private static String setGetParams(String url, Map<String,String> params){
         if(!params.isEmpty()){
             StringBuilder sb = new StringBuilder();
             for(Map.Entry entry : params.entrySet()){
                 sb.append(entry.getKey()).append("=").append(entry.getValue());
                 sb.append("&");
             }
-            url += "?" + sb.toString();
-            url.replace(url.charAt(url.lastIndexOf("&")) + "","");
+            sb.deleteCharAt(sb.lastIndexOf("&"));
+            return url + "?" + sb.toString();
         }
+        return url;
     }
 
     /**
