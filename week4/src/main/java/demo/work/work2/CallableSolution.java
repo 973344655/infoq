@@ -6,11 +6,11 @@ import java.util.concurrent.*;
  * 使用Callable得到返回值
  * @author xxl
  */
-public class RunnableSolution {
+public class CallableSolution {
 
     public static void main(String[] args) throws Exception {
         long start=System.currentTimeMillis();
-        new RunnableSolution().method2();
+        new CallableSolution().method3();
         System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
     }
 
@@ -50,4 +50,19 @@ public class RunnableSolution {
 
         System.out.println(future.get());
     }
+
+    /**
+     * 使用CompletableFuture异步处理
+     * @throws Exception
+     */
+    private void method3() throws Exception{
+
+        CompletableFuture future = CompletableFuture
+                .supplyAsync(() -> Fibonacci.sum());
+
+        System.out.println(future.get());
+
+
+    }
+
 }

@@ -1,6 +1,4 @@
-package java0.conc0303;
-
-import java.util.concurrent.CountDownLatch;
+package demo.work.work2;
 
 /**
  * 本周作业：（必做）思考有多少种方式，在main函数启动一个新线程或线程池，
