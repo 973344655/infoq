@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 13/06/2021 15:45:20
+ Date: 19/06/2021 13:54:46
 */
 
 SET NAMES utf8mb4;
@@ -31,11 +31,11 @@ CREATE TABLE `infoq_orders`  (
   `transaction_id` bigint(12) NOT NULL COMMENT '交易详情',
   `amount_detail_id` bigint(12) NOT NULL COMMENT '金额详情',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货地址',
-  `status` int(1) NOT NULL COMMENT '订单状态',
-  `pay_time` datetime NULL DEFAULT NULL COMMENT '付款时间',
-  `delivery_time` datetime NULL DEFAULT NULL COMMENT '发货时间',
-  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` tinyint(1) NOT NULL COMMENT '订单状态',
+  `pay_time` bigint(13) NULL DEFAULT NULL COMMENT '付款时间',
+  `delivery_time` bigint(13) NULL DEFAULT NULL COMMENT '发货时间',
+  `create_time` bigint(13) NULL DEFAULT NULL,
+  `update_time` bigint(13) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 

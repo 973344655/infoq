@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 13/06/2021 15:45:37
+ Date: 19/06/2021 13:54:57
 */
 
 SET NAMES utf8mb4;
@@ -31,14 +31,10 @@ CREATE TABLE `infoq_products`  (
   `stock` int(11) NULL DEFAULT NULL COMMENT '库存',
   `tags` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标签',
   `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `status` int(1) NULL DEFAULT NULL,
-  `create_time` datetime NULL DEFAULT NULL,
-  `update_time` datetime NULL DEFAULT NULL,
+  `status` tinyint(1) NULL DEFAULT NULL,
+  `create_time` bigint(13) NULL DEFAULT NULL,
+  `update_time` bigint(13) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of infoq_products
--- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
