@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 19/06/2021 13:54:46
+ Date: 19/06/2021 14:23:09
 */
 
 SET NAMES utf8mb4;
@@ -37,6 +37,6 @@ CREATE TABLE `infoq_orders`  (
   `create_time` bigint(13) NULL DEFAULT NULL,
   `update_time` bigint(13) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="demo.work.work2.mapper.DemoMapper">
+
+    <insert id="insertOne" parameterType="demo.work.work2.entity.OrderEntity">
+
+        insert into infoq_orders
+            (order_no, customer_id, product_num, product_detail_id,
+             amount, transaction_id, amount_detail_id, address,
+             status, pay_time, delivery_time, create_time,
+             update_time)
+        values (
+                #{orderNo}, #{customerId}, #{productNum}, #{productDetailId},
+                #{amount}, #{transactionId}, #{amountDetailId}, #{address},
+                #{status}, #{payTime}, #{deliveryTime}, #{createTime},
+                #{updateTime}
+               )
+    </insert>
+
+    <insert id="insertBatch" parameterType="list">
+        insert into infoq_orders
+        (order_no, customer_id, product_num, product_detail_id,
+         amount, transaction_id, amount_detail_id, address,
+         status, pay_time, delivery_time, create_time,
+         update_time)
+        values
+           <foreach collection="list" item="item" index="index" separator=",">
+               (
+               #{item.orderNo}, #{item.customerId}, #{item.productNum}, #{item.productDetailId},
+               #{item.amount}, #{item.transactionId}, #{item.amountDetailId}, #{item.address},
+               #{item.status}, #{item.payTime}, #{item.deliveryTime}, #{item.createTime},
+               #{item.updateTime}
+               )
+           </foreach>
+
+
+    </insert>
+
+</mapper>
