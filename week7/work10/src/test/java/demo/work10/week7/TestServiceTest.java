@@ -19,10 +19,10 @@ public class TestServiceTest {
     @Autowired
     TestService testService;
 
-//    @Test
-//    public void test(){
-//        testService.shardingSphere();
-//    }
+    @Test
+    public void test(){
+        testService.shardingSphere();
+    }
 
 
 
