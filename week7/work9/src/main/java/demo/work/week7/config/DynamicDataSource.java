@@ -7,6 +7,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {
-        return DatabaseContextHolder.getDbType();//可以决定使用那个db
+        //可以决定使用那个db
+        return DatabaseContextHolder.getDbType();
     }
 }

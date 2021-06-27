@@ -169,7 +169,8 @@ public class OrderService {
     }
 
     public void rewriteBatch(){
-        String url="jdbc:mysql://127.0.0.1:3306/infoq?setUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true";
+        String url="jdbc:mysql://127.0.0.1:3306/infoq?setUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useSSL=false";
+//        String url="jdbc:mysql://127.0.0.1:3306/infoq?setUnicode=true&characterEncoding=utf8&useSSL=false";
         String userName="root";
         String password="123456";
         Connection conn=null;
@@ -190,7 +191,11 @@ public class OrderService {
                     "               )";
             PreparedStatement statement = conn.prepareStatement(sql);
             long start = System.currentTimeMillis();
+            System.out.println(start);
+
             for(int i = 0; i < 100; i++){
+
+                long t1 = System.currentTimeMillis();
                 for(int j=0; j<10000; j++){
                     OrderEntity entity = new OrderEntity(i*10000 + j);
                     statement.setString(1, entity.getOrderNo());
@@ -207,14 +212,20 @@ public class OrderService {
                     statement.setString(12, entity.getCreateTime());
                     statement.setString(13, entity.getUpdateTime());
 
+
                     statement.addBatch();
 
                 }
+                long t2 = System.currentTimeMillis();
                 statement.executeBatch();
+
+                long t3 = System.currentTimeMillis();
+                System.out.println(t3-t2);
             }
 
             conn.commit();
             long end = System.currentTimeMillis();
+            System.out.println(end);
             System.out.println("used : "+ (end - start));
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -1,6 +1,7 @@
 package demo.work.week7.service;
 
 import demo.work.week7.annotation.DataSource;
+import demo.work.week7.annotation.ReadOnly;
 import demo.work.week7.config.DatabaseContextHolder;
 import demo.work.week7.mapper.TestMapper;
 import org.checkerframework.checker.units.qual.A;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@ReadOnly
 public class TestService {
 
     @Autowired
@@ -19,7 +21,8 @@ public class TestService {
         DatabaseContextHolder.clearDbType();
     }
 
-    @DataSource(value = "db2")
+//    @DataSource(value = "db2")
+    @ReadOnly("db2")
     public void userAnnotaion(){
         System.out.println(testMapper.getOrders().size());
     }

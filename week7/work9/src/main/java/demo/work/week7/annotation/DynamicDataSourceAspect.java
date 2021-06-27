@@ -11,9 +11,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+/**
+ * @author xxl
+ */
 @Component
 @Aspect
-@Order(1)
+//@Order(-1)
 public class DynamicDataSourceAspect {
 
     @Pointcut("@annotation(demo.work.week7.annotation.DataSource)")
@@ -37,6 +40,7 @@ public class DynamicDataSourceAspect {
      */
     private DataSource getDSAnnotation(ProceedingJoinPoint joinPoint){
         Class<?> targetClass = joinPoint.getTarget().getClass();
+        System.out.println("********************");
         DataSource dsAnnotation = targetClass.getAnnotation(DataSource.class);
         // 先判断类的注解，再判断方法注解
         if(Objects.nonNull(dsAnnotation)){
