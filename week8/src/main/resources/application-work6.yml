@@ -1,0 +1,40 @@
+# ShardingSphere-分库分表配置
+spring:
+  shardingsphere:
+    props:
+      sql:
+        show: true
+    datasource:
+      names: ds-0, ds-1
+      ds-0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/infoq2?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: 123456
+      ds-1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/infoq3?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: 123456
+    sharding:
+      tables:
+        # 逻辑表名
+        t_order:
+          actualDataNodes: ds-$->{0..1}.infoq_orders_$->{0..1}
+          keyGenerator:
+            column: id
+            type: SNOWFLAKE
+          databaseStrategy:
+            inline:
+              algorithmExpression: ds-$->{customer_id % 2}
+              shardingColumn: customer_id
+          tableStrategy:
+            inline:
+              algorithmExpression: infoq_orders_$->{id % 2}
+              shardingColumn: id
+logging:
+  level:
+    root: info
+    org.springframework.jdbc.core: info

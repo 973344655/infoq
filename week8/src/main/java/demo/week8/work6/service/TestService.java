@@ -1,12 +1,26 @@
+package demo.week8.work6.service;
 
+import demo.week8.work6.mapper.TestMapper;
+import org.apache.shardingsphere.transaction.annotation.ShardingTransactionType;
+import org.apache.shardingsphere.transaction.core.TransactionType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-## work06(必做题第2题)
+import javax.transaction.RollbackException;
+import java.util.HashMap;
+import java.util.Map;
 
+@Service
+public class TestService {
 
-```
+    @Autowired
+    TestMapper testMapper;
 
     @Transactional(rollbackFor = RollbackException.class)
-    @ShardingTransactionType(TransactionType.XA) 
+    @ShardingTransactionType(TransactionType.XA)  // 支持TransactionType.LOCAL, TransactionType.XA, TransactionType.BASE
     public void insert() {
 
         testMapper.insert(1001, 2);
@@ -66,5 +80,4 @@
         //全部插入失败
 
     }
-```
-
+}
