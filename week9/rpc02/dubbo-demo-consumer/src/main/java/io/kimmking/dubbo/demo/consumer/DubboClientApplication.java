@@ -1,5 +1,6 @@
 package io.kimmking.dubbo.demo.consumer;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import io.kimmking.dubbo.demo.api.Order;
 import io.kimmking.dubbo.demo.api.OrderService;
 import io.kimmking.dubbo.demo.api.User;
@@ -16,7 +17,7 @@ public class DubboClientApplication {
 	@DubboReference(version = "1.0.0") //, url = "dubbo://127.0.0.1:12345")
 	private UserService userService;
 
-	@DubboReference(version = "1.0.0") //, url = "dubbo://127.0.0.1:12345")
+	@DubboReference(version = "2.0.1") //, url = "dubbo://127.0.0.1:12345")
 	private OrderService orderService;
 
 	public static void main(String[] args) {
@@ -43,6 +44,11 @@ public class DubboClientApplication {
 			System.out.println("find user id=1 from server: " + user.getName());
 			Order order = orderService.findOrderById(1992129);
 			System.out.println(String.format("find order name=%s, amount=%f",order.getName(),order.getAmount()));
+
+			System.out.println("****************** test tcc *******************");
+//			orderService.rmb2Dollar(10000, 700);
+
+			orderService.rmb2Dollar2(10000, 700);
 		};
 	}
 

@@ -4,6 +4,7 @@ package io.kimmking.rpcfx.client;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;
 import io.kimmking.rpcfx.api.*;
+import io.kimmking.rpcfx.client.netty.NettyClient;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -85,6 +86,8 @@ public final class Rpcfx {
 
             RpcfxResponse response = post(request, url);
 
+
+
             // 加filter地方之三
             // Student.setTeacher("cuijing");
 
@@ -94,20 +97,35 @@ public final class Rpcfx {
             return JSON.parse(response.getResult().toString());
         }
 
+
         private RpcfxResponse post(RpcfxRequest req, String url) throws IOException {
             String reqJson = JSON.toJSONString(req);
             System.out.println("req json: "+reqJson);
 
+            String res = "";
+            try {
+                new NettyClient().connect(18080,"127.0.0.1",
+                        reqJson, JSONTYPE);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return JSON.parseObject(res, RpcfxResponse.class);
+
             // 1.可以复用client
             // 2.尝试使用httpclient或者netty client
-            OkHttpClient client = new OkHttpClient();
-            final Request request = new Request.Builder()
-                    .url(url)
-                    .post(RequestBody.create(JSONTYPE, reqJson))
-                    .build();
-            String respJson = client.newCall(request).execute().body().string();
-            System.out.println("resp json: "+respJson);
-            return JSON.parseObject(respJson, RpcfxResponse.class);
+//            OkHttpClient client = new OkHttpClient();
+//            final Request request = new Request.Builder()
+//                    .url(url)
+//                    .post(RequestBody.create(JSONTYPE, reqJson))
+//                    .build();
+//            String respJson = client.newCall(request).execute().body().string();
+//            System.out.println("resp json: "+respJson);
+//            return JSON.parseObject(respJson, RpcfxResponse.class);
+
+//            NettyClient client1 = new NettyClient();
+//            client1.connect("127.0.0.1",18080);
+
         }
     }
 }
