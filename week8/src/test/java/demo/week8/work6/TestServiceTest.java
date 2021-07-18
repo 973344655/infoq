@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @EnableAutoConfiguration
-public class    TestServiceTest {
+public class  TestServiceTest {
 
     @Autowired
     TestService testService;
