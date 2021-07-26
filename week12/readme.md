@@ -3,7 +3,7 @@
 
 ## 必做1
 
-占位
+https://github.com/973344655/infoq/tree/master/week12/work1
 
 ## 必做2
 
